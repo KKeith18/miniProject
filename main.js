@@ -87,62 +87,81 @@ document.querySelector("#group-by").addEventListener('change', (x)=> {
     let type= x.target.value;
     console.log (type)
 
-if (type == 'Ma'){
-  document.querySelector('.bottom-left-chart').innerHTML = "";
-  document.querySelector('.bottom-right-chart').innerHTML = "";
-  
-  const BarChart = barChart('.bottom-left-chart');
-  BarChart.update(massachusetts, mass_death,'daily_vaccinations_per_million');
+    if (type == 'Ma'){
 
-  const BarChart_2 = barChart('.bottom-right-chart');
-  BarChart_2.update(mass_death, mass_death,'daily_deaths');
-}
-
-else if (type == 'Miss') {
-  document.querySelector('.bottom-left-chart').innerHTML = "";
-  document.querySelector('.bottom-right-chart').innerHTML = "";
-  
-  const BarChart = barChart('.left-chart');
-  BarChart.update(mississippi, miss_death,'daily_vaccinations_per_million');
-
-  const BarChart_2 = barChart('.right-chart');
-  BarChart_2.update(miss_death, miss_death,'daily_deaths');
-}
-
-else if (type == 'national') {
-  document.querySelector('.left-chart').innerHTML = "";
-  document.querySelector('.right-chart').innerHTML = "";
-  document.querySelector('.bottom-left-chart').innerHTML = "";
-  document.querySelector('.bottom-right-chart').innerHTML = "";
-
-  const BarChart = barChart('.left-chart');
-  BarChart.update(date_filter_national, date_filter_national,'cases');
-
-  const BarChart_2 = barChart('.right-chart');
-  BarChart_2.update(date_filter_national, date_filter_national,'deaths');
-//remove the other 2 charts if they still appear after selecting national
-
-
-}
-else if (type == 'Both'){
-  document.querySelector('.left-chart').innerHTML = "";
-  document.querySelector('.right-chart').innerHTML = "";
-  document.querySelector('.bottom-left-chart').innerHTML = "";
-  document.querySelector('.bottom-right-chart').innerHTML = "";
-
-  const BarChart = barChart('.left-chart');
-  BarChart.update(massachusetts, mass_death,'daily_vaccinations_per_million');
-
-  const BarChart_2 = barChart('.right-chart');
-  BarChart_2.update(mississippi, miss_death,'daily_vaccinations_per_million');
-
-  const BarChart_3 = barChart('.left-chart');
-  BarChart_3.update(mass_death, mass_death,'daily_deaths');
-
-  const BarChart_4 = barChart('.right-chart');
-  BarChart_4.update(miss_death, miss_death,'daily_deaths');
-
-}
+      document.querySelector('.left-chart').innerHTML = "";
+      document.querySelector('.right-chart').innerHTML = "";
+      document.querySelector('.bottom-left-chart').innerHTML = "";
+      document.querySelector('.bottom-right-chart').innerHTML = "";
+    
+      const BarChart = barChart('.bottom-left-chart');
+      BarChart.update(massachusetts, mass_death,'daily_vaccinations_per_million');
+    
+      const BarChart_2 = barChart('.bottom-right-chart');
+      BarChart_2.update(mass_death, mass_death,'death_rate');
+    
+      const BarChart_3 = barChart('.left-chart');
+      BarChart_3.update(date_filter_national, date_filter_national,'cases');
+    
+      const BarChart_4 = barChart('.right-chart');
+      BarChart_4.update(date_filter_national, date_filter_national,'deaths');
+    //remove the other 2 charts if they still appear after selecting national
+    }
+    
+    else if (type == 'Miss') {
+      document.querySelector('.left-chart').innerHTML = "";
+      document.querySelector('.right-chart').innerHTML = "";
+      document.querySelector('.bottom-left-chart').innerHTML = "";
+      document.querySelector('.bottom-right-chart').innerHTML = "";
+      
+      const BarChart = barChart('.bottom-left-chart');
+      BarChart.update(mississippi, miss_death,'daily_vaccinations_per_million');
+    
+      const BarChart_2 = barChart('.bottom-right-chart');
+      BarChart_2.update(miss_death, miss_death,'death_rate');
+    
+      const BarChart_3 = barChart('.left-chart');
+      BarChart_3.update(date_filter_national, date_filter_national,'cases');
+    
+      const BarChart_4 = barChart('.right-chart');
+      BarChart_4.update(date_filter_national, date_filter_national,'deaths');
+    //remove the other 2 charts if they still appear after selecting national
+    }
+    
+    else if (type == 'national') {
+      document.querySelector('.left-chart').innerHTML = "";
+      document.querySelector('.right-chart').innerHTML = "";
+      document.querySelector('.bottom-left-chart').innerHTML = "";
+      document.querySelector('.bottom-right-chart').innerHTML = "";
+    
+      const BarChart_3 = barChart('.left-chart');
+      BarChart_3.update(date_filter_national, date_filter_national,'cases');
+    
+      const BarChart_4 = barChart('.right-chart');
+      BarChart_4.update(date_filter_national, date_filter_national,'deaths');
+    //remove the other 2 charts if they still appear after selecting national
+    
+    
+    }
+    else if (type == 'Both'){
+      document.querySelector('.left-chart').innerHTML = "";
+      document.querySelector('.right-chart').innerHTML = "";
+      document.querySelector('.bottom-left-chart').innerHTML = "";
+      document.querySelector('.bottom-right-chart').innerHTML = "";
+    
+      const BarChart = barChart('.left-chart');
+      BarChart.update(massachusetts, mass_death,'daily_vaccinations_per_million');
+    
+      const BarChart_2 = barChart('.right-chart');
+      BarChart_2.update(mississippi, miss_death,'daily_vaccinations_per_million');
+    
+      const BarChart_3 = barChart('.bottom-left-chart');
+      BarChart_3.update(mass_death, mass_death,'death_rate');
+    
+      const BarChart_4 = barChart('.bottom-right-chart');
+      BarChart_4.update(miss_death, miss_death,'death_rate');
+    
+    }
 
 })
 
@@ -168,59 +187,3 @@ const LineChart = lineChart('.bottom-right-chart');
 })
   
 })
-
-
-if (type == 'Ma'){
-  document.querySelector('.bottom-left-chart').innerHTML = "";
-  document.querySelector('.bottom-right-chart').innerHTML = "";
-  
-  const BarChart = barChart('.left-chart');
-  BarChart.update(massachusetts, mass_death,'daily_vaccinations_per_million');
-
-  const BarChart_2 = barChart('.right-chart');
-  BarChart_2.update(mass_death, mass_death,'daily_deaths');
-}
-
-else if (type == 'Miss') {
-  document.querySelector('.bottom-left-chart').innerHTML = "";
-  document.querySelector('.bottom-right-chart').innerHTML = "";
-  
-  const BarChart = barChart('.left-chart');
-  BarChart.update(mississippi, miss_death,'daily_vaccinations_per_million');
-
-  const BarChart_2 = barChart('.right-chart');
-  BarChart_2.update(miss_death, miss_death,'daily_deaths');
-}
-
-else if (type == 'national') {
-  document.querySelector('.left-chart').innerHTML = "";
-  document.querySelector('.right-chart').innerHTML = "";
-
-  const BarChart = barChart('.left-chart');
-  BarChart.update(date_filter_national, miss_death,'daily_vaccinations_per_million');
-
-  const BarChart_2 = barChart('.right-chart');
-  BarChart_2.update(miss_death, miss_death,'daily_deaths');
-//remove the other 2 charts if they still appear after selecting national
-
-
-}
-else if (type == 'Both'){
-  document.querySelector('.left-chart').innerHTML = "";
-  document.querySelector('.right-chart').innerHTML = "";
-  document.querySelector('.bottom-left-chart').innerHTML = "";
-  document.querySelector('.bottom-right-chart').innerHTML = "";
-
-  const BarChart = barChart('.left-chart');
-  BarChart.update(massachusetts, mass_death,'daily_vaccinations_per_million');
-
-  const BarChart_2 = barChart('.right-chart');
-  BarChart_2.update(mississippi, miss_death,'daily_vaccinations_per_million');
-
-  const BarChart_3 = barChart('.left-chart');
-  BarChart_3.update(mass_death, mass_death,'daily_deaths');
-
-  const BarChart_4 = barChart('.right-chart');
-  BarChart_4.update(miss_death, miss_death,'daily_deaths');
-
-}

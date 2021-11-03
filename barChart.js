@@ -14,7 +14,6 @@ export default function barChart(container){
     const xScale = d3
         .scaleBand()
         .range([0, width])
-        .round(true)
         .paddingInner(0.1)
   
     const yScale = d3
@@ -22,7 +21,7 @@ export default function barChart(container){
         .range([height,0])
 
     const xTime = d3.scaleTime()
-        .rangeRound([0, width - margin.right])
+        .rangeRound([0, width])
   
   
     const xAxis = d3.axisBottom()
@@ -45,8 +44,18 @@ export default function barChart(container){
     
         // Update scale domains
         xScale.domain(data_2.map(d=>d.date))
-    
+
+        if (type == 'daily_vaccinations_per_million'){
+            yScale.domain([0,13024])
+        }
+
+        else if (type == 'death_rate'){
+            yScale.domain([0,173])
+        }
+
+        else {
         yScale.domain([0,d3.max(data.map(d=>d[type]))])
+        }
 
         xTime.domain(d3.extent(data_2.map(d=>d.date)))
     
@@ -54,6 +63,9 @@ export default function barChart(container){
         .data(data);
 
         const formatTime = d3.timeFormat("%B %d, %Y");
+
+        d3.select('.tooltip')
+        .style('display', 'none');
     
     if (type =='deaths'){
         bars.enter()
@@ -72,7 +84,7 @@ export default function barChart(container){
 
                 (`<p>
                 Date: ${formatTime(d.date)} <br>
-                Deaths: ${[d[type]]}
+                Total Deaths: ${[d[type]]}
                       </p>`);
             
               })
@@ -89,7 +101,7 @@ export default function barChart(container){
             .attr('width', xScale.bandwidth())
             .attr('height', d => height - yScale(d[type]))
             .style("opacity", .5)
-            .attr('fill', '#69a3b2')
+            .attr('fill', 'red')
             .attr("class","bar");
             }
         else if (type == 'cases'){
@@ -108,7 +120,7 @@ export default function barChart(container){
                     .html
                     (`<p>
                     Date: ${formatTime(d.date)} <br>
-                    Covid Vaccination Rate: ${d[type]}                     
+                    Total Cases: ${d[type]}                     
                         </p>`);
                 
                 })
@@ -130,9 +142,10 @@ export default function barChart(container){
 
         }
 
-        else if (type == 'daily_deaths'){
+        else if (type == 'death_rate'){
             bars.enter()
             .append('rect')
+            .attr('fill', '#FFFFF')
             .attr('x', d=>xScale(d.date))
             .attr("y", (d)=> yScale(d[type]))
             .merge(bars)
@@ -147,7 +160,7 @@ export default function barChart(container){
 
                     (`<p>
                     Date: ${formatTime(d.date)} <br>
-                    Daily Deaths: ${d[type]} 
+                    Death Rate (per Mil): ${d[type]} 
                 
                     
                         </p>`);
@@ -166,7 +179,7 @@ export default function barChart(container){
             .attr('width', xScale.bandwidth())
             .attr('height', d => height - yScale(d[type]))
             .style("opacity", .5)
-            .attr('fill', '#69a3b2')
+            .attr('fill', 'red')
             .attr("class","bar");
 
         }
@@ -228,14 +241,14 @@ export default function barChart(container){
         .call(yAxis)
         .attr("transform", `translate(0, 0)`)
 
-        if (type == 'daily_deaths'){
+        if (type == 'death_rate'){
             svg.select(".y")
             .attr("class", "y label")
             .attr("text-anchor", "end")
             .attr("y", -50)
             .attr("dy", ".75em")
             .attr("transform", "rotate(-90)")
-            .text('Daily Deaths');
+            .text('Death Rate (per million)');
         }
     
         else if (type == 'daily_vaccinations_per_million') {
@@ -282,7 +295,13 @@ export default function barChart(container){
         .attr("stroke", "black")
         .attr("stroke-width", 2)
         .attr("d", line);
-  
+
+        if (data[0].state == 'Massachusetts' || data[0].location == 'Massachusetts') {
+            svg.append('text').text('MASSACHUSETTS').attr('x', 50).attr('y', +25).attr('font-size', 25);}
+        else if (data[0].state == 'Mississippi' || data[0].location == 'Mississippi') {
+            svg.append('text').text('MISSISSIPPI').attr('x', 50).attr('y', +25).attr('font-size', 25);}
+        else if (data[0].Entity == 'World') {
+            svg.append('text').text('NATIONAL DATA').attr('x', 50).attr('y', +25).attr('font-size', 25);}
   }
 
   return {update}
