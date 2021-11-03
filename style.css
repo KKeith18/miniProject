@@ -1,0 +1,10 @@
+body{
+    padding:40px;
+    margin-right:300px;
+}
+
+.tooltip {
+    background-color:lightgray;
+    padding:7px;
+    border-radius:5px;
+}
