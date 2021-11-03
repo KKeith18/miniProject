@@ -2,7 +2,7 @@ import barLineChart from './BarLineChart.js';
 import lineChart from './LineChart.js';
 import barChart from './barChart.js';
 //load the data in here
-
+//hello
 d3.csv('/national.csv', d3.autoType).then(data=>{
     console.log('national', data)
 
